@@ -2,6 +2,7 @@
 
 FROM python:3.10-slim
 
+RUN apt update
 RUN apt -y install ffmpeg
 
 RUN pip install --no-cache-dir --upgrade pip
