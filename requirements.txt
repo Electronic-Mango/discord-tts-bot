@@ -1,0 +1,4 @@
+disnake
+gTTS
+python-dotenv
+PyNaCl
