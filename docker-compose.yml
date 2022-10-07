@@ -10,7 +10,7 @@ services:
     environment:
       - DISCORD_BOT_TOKEN=
       - TEXT_LANGUAGE=
-      - SOURCE_CHANNEL_ID=
+      - SOURCE_CHANNEL_IDS=
       - TARGET_CHANNEL_ID=
       # - VOICE_FILE_PATH=voice_file.mp3
 networks:

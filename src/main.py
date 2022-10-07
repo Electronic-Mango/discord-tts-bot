@@ -10,7 +10,7 @@ load_dotenv()
 
 DISCORD_BOT_TOKEN = environ["DISCORD_BOT_TOKEN"]
 TEXT_LANGUAGE = environ["TEXT_LANGUAGE"]
-SOURCE_CHANNEL_ID = int(environ["SOURCE_CHANNEL_ID"])
+SOURCE_CHANNEL_IDS = list(map(int, environ["SOURCE_CHANNEL_IDS"].split(",")))
 TARGET_CHANNEL_ID = int(environ["TARGET_CHANNEL_ID"])
 VOICE_FILE_PATH = environ.get("VOICE_FILE_PATH", "voice_file.mp3")
 
@@ -21,7 +21,7 @@ bot = Bot(intents=intents)
 
 @bot.event
 async def on_message(message: Message) -> None:
-    if message.channel.id != SOURCE_CHANNEL_ID or not (text := message.content):
+    if message.channel.id not in SOURCE_CHANNEL_IDS or not (text := message.content):
         return
     voice_client = await get_voice_client()
     speech = gTTS(text, lang=TEXT_LANGUAGE)
