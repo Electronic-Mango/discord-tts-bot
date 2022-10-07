@@ -1,0 +1,19 @@
+# Basic docker-compose.yml running the project as docker container.
+
+version: "3.9"
+services:
+  discord-tts-bot:
+    image: discord-tts-bot:latest
+    build: .
+    container_name: discord-tts-bot
+    restart: unless-stopped
+    environment:
+      - DISCORD_BOT_TOKEN=
+      - TEXT_LANGUAGE=
+      - SOURCE_CHANNEL_ID=
+      - TARGET_CHANNEL_ID=
+      # - VOICE_FILE_PATH=voice_file.mp3
+networks:
+  default:
+    name: discord-tts-bot-network
+    driver: bridge
