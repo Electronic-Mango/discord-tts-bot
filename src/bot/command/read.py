@@ -24,7 +24,10 @@ class ReadCog(Cog):
         message: Message,
     ) -> None:
         """Read out given text"""
-        if text := message.content:
+        await self._read(interaction, message.content)
+
+    async def _read(self, interaction: CommandInteraction, text: str) -> None:
+        if text := text.strip():
             await self._read(interaction, text)
         else:
             await interaction.send("No text to read out!")
