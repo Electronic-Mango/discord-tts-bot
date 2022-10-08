@@ -17,7 +17,7 @@ class SourceCog(Cog):
     async def source(self, interaction: CommandInteraction) -> None:
         """Command toggling assignment of current channel for TTS"""
         channel_id = interaction.channel_id
-        if self._on_message_cog.has_source_channel_id(channel_id):
+        if self._on_message_cog.is_source_channel_id(channel_id):
             self._on_message_cog.remove_source_channel_id(channel_id)
             await interaction.send("Channel removed")
         else:

@@ -7,8 +7,8 @@ from disnake import Client, Message
 from disnake.ext.commands import Cog
 from loguru import logger
 
-from bot.tts_scheduler import TtsScheduler
 from bot.persistency import load_source_channels, save_source_channels
+from bot.tts_scheduler import TtsScheduler
 
 
 class OnMessageCog(Cog):
@@ -27,7 +27,7 @@ class OnMessageCog(Cog):
         self._source_channel_ids.remove(channel_id)
         save_source_channels(self._source_channel_ids)
 
-    def has_source_channel_id(self, channel_id: int) -> None:
+    def is_source_channel_id(self, channel_id: int) -> None:
         """Check if given channel ID is already stored"""
         return channel_id in self._source_channel_ids
 
