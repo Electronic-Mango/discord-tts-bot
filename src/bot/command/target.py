@@ -22,7 +22,7 @@ class TargetCog(Cog):
         await interaction.response.defer()
         channel = interaction.channel
         if channel.type != ChannelType.voice:
-            await interaction.send("Can only be used in voice channels!")
+            await interaction.send("Can only be used in voice channels!", ephemeral=True)
         elif self._speaker.is_target_channel(channel.id):
             await self._speaker.clear_target_channel()
             await interaction.send("Current channel unset as target")
