@@ -2,11 +2,8 @@
 Module creating the bot, adding all required Cogs and running it.
 """
 
-from os import getenv
-
 from disnake import Client, Intents
 from disnake.ext.commands import InteractionBot
-from dotenv import load_dotenv
 
 from bot.command.source import SourceCog
 from bot.command.target import TargetCog
@@ -14,9 +11,6 @@ from bot.event.on_message import OnMessage
 from bot.event.on_ready import OnReady
 from bot.speaker import Speaker
 from bot.tts_scheduler import TtsScheduler
-
-load_dotenv()
-DISCORD_BOT_TOKEN = getenv("DISCORD_BOT_TOKEN")
 
 
 def prepare_bot() -> Client:
