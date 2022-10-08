@@ -28,6 +28,11 @@ class Speaker:
         await self._connect_voice_client(channel_id)
         save_target_channel(channel_id)
 
+    def get_target_channel(self) -> str:
+        """Return used voice channel info string"""
+        target_channel = self._voice_client.channel
+        return f"**{target_channel}** - {target_channel.guild}"
+
     def is_target_channel(self, channel_id: int) -> None:
         """Check if given channel ID matches channel used as TTS target"""
         return self._voice_client and channel_id == self._voice_client.channel.id

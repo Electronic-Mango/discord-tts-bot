@@ -31,6 +31,12 @@ class OnMessageCog(Cog):
         """Check if given channel ID is already stored"""
         return channel_id in self._source_channel_ids
 
+    def get_source_channels(self) -> str:
+        """Return used voice channels info string"""
+        source_channels = [self._bot.get_channel(id) for id in self._source_channel_ids]
+        info = [f" - **{channel}** - {channel.guild}" for channel in source_channels]
+        return "\n".join(info)
+
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
         """Schedule messages from stored channels for TTS"""
