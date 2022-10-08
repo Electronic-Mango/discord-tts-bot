@@ -10,10 +10,17 @@ services:
     volumes:
       - ./persistency:/app/persistency
     environment:
+      # Mandatory Discord bot token.
       - DISCORD_BOT_TOKEN=
-      - TEXT_LANGUAGE=
+      # Mandatory language code used for TTS, check gTTS documentation for details.
+      - TEXT_LANGUAGE=en
+      # File used for storing channel data between bot restarts.
+      # Both files are stored in a mounted volume, so they should survive recreating the container.
       - SOURCE_CHANNELS_FILE=./persistency/sources
       - TARGET_CHANNEL_FILE=./persistency/target
+      # Optional voice file path.
+      # Here gTTS will store converted audio files, which will be later read out.
+      # Doesn't matted much when it comes to Docker container.
       # - VOICE_FILE_PATH=voice_file.mp3
 networks:
   default:
