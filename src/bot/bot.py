@@ -2,8 +2,11 @@
 Module creating the bot, adding all required Cogs.
 """
 
+from os import environ
+
 from disnake import Client, Intents
 from disnake.ext.commands import InteractionBot
+from dotenv import load_dotenv
 
 from bot.command.read import ReadCog
 from bot.command.source import SourceCog
@@ -13,8 +16,11 @@ from bot.event.on_ready import OnReadyCog
 from bot.speaker import Speaker
 from bot.tts_scheduler import TtsScheduler
 
+load_dotenv()
+DISCORD_BOT_TOKEN = environ["DISCORD_BOT_TOKEN"]
 
-def prepare_bot() -> Client:
+
+def prepare_and_run_bot() -> Client:
     bot = InteractionBot(intents=_prepare_intents())
     speaker = Speaker(bot)
     tts_scheduler = TtsScheduler(bot.loop, speaker)
@@ -23,7 +29,7 @@ def prepare_bot() -> Client:
     bot.add_cog(SourceCog(on_message))
     bot.add_cog(TargetCog(speaker))
     bot.add_cog(ReadCog(tts_scheduler))
-    return bot
+    bot.run(token=DISCORD_BOT_TOKEN)
 
 
 def _prepare_intents() -> Intents:
