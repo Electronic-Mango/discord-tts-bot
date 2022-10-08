@@ -5,6 +5,7 @@ Module creating the bot, adding all required Cogs.
 from disnake import Client, Intents
 from disnake.ext.commands import InteractionBot
 
+from bot.command.read import ReadCog
 from bot.command.source import SourceCog
 from bot.command.target import TargetCog
 from bot.event.on_message import OnMessageCog
@@ -21,6 +22,7 @@ def prepare_bot() -> Client:
     bot.add_cog(on_message := OnMessageCog(bot, tts_scheduler))
     bot.add_cog(SourceCog(on_message))
     bot.add_cog(TargetCog(speaker))
+    bot.add_cog(ReadCog(tts_scheduler))
     return bot
 
 
