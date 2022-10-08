@@ -7,11 +7,13 @@ services:
     build: .
     container_name: discord-tts-bot
     restart: unless-stopped
+    volumes:
+      - ./persistency:/app/persistency
     environment:
       - DISCORD_BOT_TOKEN=
       - TEXT_LANGUAGE=
-      - SOURCE_CHANNELS_FILE=
-      - TARGET_CHANNEL_FILE=
+      - SOURCE_CHANNELS_FILE=./persistency/sources
+      - TARGET_CHANNEL_FILE=./persistency/target
       # - VOICE_FILE_PATH=voice_file.mp3
 networks:
   default:
