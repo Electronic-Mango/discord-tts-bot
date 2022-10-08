@@ -12,6 +12,7 @@ from bot.command.list import ListCog
 from bot.command.read import ReadCog
 from bot.command.source import SourceCog
 from bot.command.target import TargetCog
+from bot.event.on_application_command import OnApplicationCommandCog
 from bot.event.on_message import OnMessageCog
 from bot.event.on_ready import OnReadyCog
 from bot.speaker import Speaker
@@ -25,6 +26,7 @@ def prepare_and_run_bot() -> Client:
     bot = InteractionBot(intents=_prepare_intents())
     speaker = Speaker(bot)
     tts_scheduler = TtsScheduler(bot.loop, speaker)
+    bot.add_cog(OnApplicationCommandCog())
     bot.add_cog(OnReadyCog(bot, speaker))
     bot.add_cog(on_message := OnMessageCog(bot, tts_scheduler))
     bot.add_cog(SourceCog(on_message))
