@@ -4,6 +4,7 @@ Messages from configured source channels will be read out here.
 """
 
 from disnake import CommandInteraction
+from disnake.enums import ChannelType
 from disnake.ext.commands import Cog, slash_command
 
 from bot.speaker import Speaker
@@ -17,9 +18,12 @@ class TargetCog(Cog):
     async def target(self, interaction: CommandInteraction) -> None:
         """Command setting current channel as TTS target"""
         await interaction.response.defer()
-        if self._speaker.is_target_channel(channel_id := interaction.channel_id):
+        channel = interaction.channel
+        if channel.type != ChannelType.voice:
+            await interaction.send("Can only be used in voice channels!")
+        elif self._speaker.is_target_channel(channel.id):
             await self._speaker.clear_target_channel()
             await interaction.send("Current channel unset as target")
         else:
-            await self._speaker.set_target_channel(channel_id)
+            await self._speaker.set_target_channel(channel.id)
             await interaction.send("Current channel set as target")
