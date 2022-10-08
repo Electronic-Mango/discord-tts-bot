@@ -1,16 +1,11 @@
-from os import environ
 from typing import Any, Callable, Optional
 
 from disnake import Client, FFmpegPCMAudio, PCMVolumeTransformer
-from dotenv import load_dotenv
-from gtts import gTTS
+from disnake.utils import remove_markdown
 from loguru import logger
 
 from bot.persistency import load_target_channel, save_target_channel
-
-load_dotenv()
-TEXT_LANGUAGE = environ["TEXT_LANGUAGE"]
-VOICE_FILE_PATH = environ.get("VOICE_FILE_PATH", "voice_file.mp3")
+from tts import convert_text_to_speech_file
 
 
 class Speaker:
@@ -46,7 +41,10 @@ class Speaker:
         if not self._voice_client:
             logger.info("Voice client not set, skipping")
             return
-        speech = gTTS(message, lang=TEXT_LANGUAGE)
-        speech.save(VOICE_FILE_PATH)
-        audio_source = PCMVolumeTransformer(FFmpegPCMAudio(VOICE_FILE_PATH))
+        cleaned_message = self._clean_message(message)
+        audio_file = convert_text_to_speech_file(cleaned_message)
+        audio_source = PCMVolumeTransformer(FFmpegPCMAudio(audio_file))
         self._voice_client.play(audio_source, after=after)
+
+    def _clean_message(self, message: str) -> str:
+        return remove_markdown(message)
