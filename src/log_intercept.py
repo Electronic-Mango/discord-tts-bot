@@ -1,11 +1,13 @@
-from logging import Handler, __file__
+from logging import Handler, LogRecord, __file__
 from sys import _getframe
 
 from loguru import logger
 
 
 class InterceptHandler(Handler):
-    def emit(self, record):
+    """Handler intercepting standard logs and passing them into loguru logger"""
+
+    def emit(self, record: LogRecord) -> None:
         try:
             level = logger.level(record.levelname).name
         except ValueError:
@@ -14,6 +16,5 @@ class InterceptHandler(Handler):
         while frame and frame.f_code.co_filename == __file__:
             frame = frame.f_back
             depth += 1
-        logger.opt(depth=depth, exception=record.exc_info).log(
-            level, record.getMessage()
-        )
+        intercepting_logger = logger.opt(depth=depth, exception=record.exc_info)
+        intercepting_logger.log(level, record.getMessage())
