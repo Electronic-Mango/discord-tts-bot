@@ -12,13 +12,13 @@ class TtsScheduler:
         self._lock = Lock()
 
     def add_message(self, message: str) -> None:
-        logger.info(f"Handling message [{message}]")
+        logger.info(f"Schedule message [{message}]")
         self._loop.create_task(self._handle_message(message))
 
     async def _handle_message(self, message: str) -> None:
         async with self._lock:
-            logger.info("Start handling message")
+            logger.info(f"Start handling message [{message}]")
             event = Event()
             self._speaker.speak(message, lambda _: event.set())
             await event.wait()
-            logger.info("Finish handling message")
+            logger.info("Finished handling message")
