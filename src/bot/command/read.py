@@ -35,7 +35,8 @@ class ReadCog(Cog):
         await self._read(interaction, message.content)
 
     async def _read(self, interaction: CommandInteraction, text: str) -> None:
-        if text := text.strip():
-            await self._read(interaction, text)
+        if stripped_text := text.strip():
+            await interaction.send("Reading...")
+            self._tts_scheduler.add_message(stripped_text)
         else:
             await interaction.send("No text to read out!")
