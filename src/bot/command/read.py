@@ -11,6 +11,8 @@ from disnake.ext.commands import Cog, Param, message_command, slash_command
 
 from bot.tts_scheduler import TtsScheduler
 
+HELP_MESSAGE = "`/read <text>` - read out given text"
+
 
 class ReadCog(Cog):
     def __init__(self, tts_scheduler: TtsScheduler) -> None:

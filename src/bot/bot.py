@@ -8,6 +8,7 @@ from disnake import Client, Intents
 from disnake.ext.commands import InteractionBot
 from dotenv import load_dotenv
 
+from bot.command.help import HelpCog
 from bot.command.list import ListCog
 from bot.command.read import ReadCog
 from bot.command.source import SourceCog
@@ -33,6 +34,7 @@ def prepare_and_run_bot() -> Client:
     bot.add_cog(TargetCog(speaker))
     bot.add_cog(ReadCog(tts_scheduler))
     bot.add_cog(ListCog(speaker, on_message))
+    bot.add_cog(HelpCog())
     bot.run(token=DISCORD_BOT_TOKEN)
 
 

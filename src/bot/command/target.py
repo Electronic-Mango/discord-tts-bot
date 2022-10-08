@@ -9,6 +9,8 @@ from disnake.ext.commands import Cog, slash_command
 
 from bot.speaker import Speaker
 
+HELP_MESSAGE = "`/target` - toggle current **voice** channel as TTS output"
+
 
 class TargetCog(Cog):
     def __init__(self, speaker: Speaker) -> None:
@@ -16,7 +18,7 @@ class TargetCog(Cog):
 
     @slash_command()
     async def target(self, interaction: CommandInteraction) -> None:
-        """Command setting current channel as TTS target"""
+        """Set current voice channel as TTS output"""
         await interaction.response.defer()
         channel = interaction.channel
         if channel.type != ChannelType.voice:
