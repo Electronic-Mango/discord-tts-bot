@@ -1,3 +1,7 @@
+"""
+Handler intercepting standard logs and passing them into loguru logger
+"""
+
 from logging import Handler, LogRecord, __file__
 from sys import _getframe
 
@@ -5,8 +9,6 @@ from loguru import logger
 
 
 class InterceptHandler(Handler):
-    """Handler intercepting standard logs and passing them into loguru logger"""
-
     def emit(self, record: LogRecord) -> None:
         try:
             level = logger.level(record.levelname).name

@@ -1,3 +1,8 @@
+"""
+Cog handling slash command setting current channel as TTS output.
+Messages from configured source channels will be read out here.
+"""
+
 from disnake import CommandInteraction
 from disnake.ext.commands import Cog, slash_command
 

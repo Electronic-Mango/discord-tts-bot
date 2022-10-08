@@ -1,3 +1,11 @@
+"""
+Class scheduling TTS tasks.
+Other modules can schedule strings to be read out simply by passing it to this class.
+New asyncio task will be created for each string.
+However, every task can access "speaker" class one at a time.
+Otherwise tasks would try to read out multiple strings at the same time.
+"""
+
 from asyncio import AbstractEventLoop, Event, Lock
 
 from loguru import logger
@@ -12,6 +20,7 @@ class TtsScheduler:
         self._lock = Lock()
 
     def add_message(self, message: str) -> None:
+        """Create TTS task for given message"""
         logger.info(f"Schedule message [{message}]")
         self._loop.create_task(self._handle_message(message))
 

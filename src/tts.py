@@ -1,3 +1,7 @@
+"""
+Module handling converting strings to audio files.
+"""
+
 from os import environ
 
 from dotenv import load_dotenv

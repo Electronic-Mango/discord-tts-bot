@@ -1,3 +1,7 @@
+"""
+Class handling reading out given texts to configured voice channel.
+"""
+
 from typing import Any, Callable, Optional
 
 from disnake import Client, FFmpegPCMAudio, PCMVolumeTransformer
@@ -14,18 +18,22 @@ class Speaker:
         self._voice_client = None
 
     async def load_target_channel(self) -> None:
+        """Load stored target voice channel from memory and connect to it"""
         if channel_id := load_target_channel():
             await self._connect_voice_client(channel_id)
 
     async def set_target_channel(self, channel_id: int) -> None:
+        """Set new target voice channel and connect to it"""
         await self._disconnect_voice_client()
         await self._connect_voice_client(channel_id)
         save_target_channel(channel_id)
 
     def is_target_channel(self, channel_id: int) -> None:
+        """Check if given channel ID matches channel used as TTS target"""
         return self._voice_client and channel_id == self._voice_client.channel.id
 
     async def clear_target_channel(self) -> None:
+        """Clear and disconnect stored target channel"""
         await self._disconnect_voice_client()
         self._voice_client = None
         save_target_channel(None)
@@ -38,6 +46,7 @@ class Speaker:
         self._voice_client = await self._bot.get_channel(channel_id).connect()
 
     def speak(self, message: str, after: Callable[[Optional[Exception]], Any]) -> None:
+        """Read given message to configured voice channel"""
         if not self._voice_client:
             logger.info("Voice client not set, skipping")
             return

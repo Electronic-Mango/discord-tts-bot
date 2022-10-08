@@ -1,5 +1,6 @@
 """
-Event Cog logging information that bot is ready to internal logger.
+Event Cog initializing output TTS channel, once bot is connected.
+If target channel is loaded up, then bot will automatically connect to this channel.
 """
 
 from disnake import Client

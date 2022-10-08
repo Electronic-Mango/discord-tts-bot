@@ -1,3 +1,11 @@
+"""
+Cog handling "read" command.
+This command is in two forms:
+ 1. Direct slash command
+ 2. Context-menu message command
+Both will schedule given text for TTS.
+"""
+
 from disnake import CommandInteraction, Message
 from disnake.ext.commands import Cog, Param, message_command, slash_command
 
@@ -31,7 +39,3 @@ class ReadCog(Cog):
             await self._read(interaction, text)
         else:
             await interaction.send("No text to read out!")
-
-    async def _read(self, interaction: CommandInteraction, text: str) -> None:
-        await interaction.send("Reading...")
-        self._tts_scheduler.add_message(text)
