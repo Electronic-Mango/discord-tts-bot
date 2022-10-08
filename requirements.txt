@@ -1,5 +1,5 @@
 disnake
 gTTS
 loguru
-python-dotenv
 PyNaCl
+python-dotenv

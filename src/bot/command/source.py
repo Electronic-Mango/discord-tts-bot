@@ -1,12 +1,11 @@
 from disnake import CommandInteraction
 from disnake.ext.commands import Cog, slash_command
 
-from bot.event.on_message import OnMessage
+from bot.event.on_message import OnMessageCog
 
 
 class SourceCog(Cog):
-    def __init__(self, on_message_cog: OnMessage) -> None:
-        super().__init__()
+    def __init__(self, on_message_cog: OnMessageCog) -> None:
         self._on_message_cog = on_message_cog
 
     @slash_command()

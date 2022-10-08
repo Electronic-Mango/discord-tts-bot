@@ -6,7 +6,6 @@ from bot.speaker import Speaker
 
 class TargetCog(Cog):
     def __init__(self, speaker: Speaker) -> None:
-        super().__init__()
         self._speaker = speaker
 
     @slash_command()
