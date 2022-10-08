@@ -15,8 +15,7 @@ class ReadCog(Cog):
         text: str = Param(name="text", description="text to read"),
     ) -> None:
         """Read out given text"""
-        await interaction.send("Reading...")
-        self._tts_scheduler.add_message(text)
+        await self._read(interaction, text)
 
     @message_command(name="read")
     async def message_read(
@@ -26,7 +25,10 @@ class ReadCog(Cog):
     ) -> None:
         """Read out given text"""
         if text := message.content:
-            await interaction.send("Reading...")
-            self._tts_scheduler.add_message(text)
+            await self._read(interaction, text)
         else:
             await interaction.send("No text to read out!")
+    
+    async def _read(self, interaction: CommandInteraction, text: str) -> None:
+        await interaction.send("Reading...")
+        self._tts_scheduler.add_message(text)
