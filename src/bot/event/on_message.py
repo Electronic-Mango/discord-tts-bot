@@ -44,4 +44,5 @@ class OnMessageCog(Cog):
             self._source_channel_ids
             and message.channel.id in self._source_channel_ids
             and message.content
+            and not message.interaction
         )
