@@ -7,14 +7,14 @@ from disnake import CommandInteraction
 from disnake.enums import ChannelType
 from disnake.ext.commands import Cog, slash_command
 
-from bot.channel.target_data import TargetChannelData
+from bot.channel.target_channel import TargetChannel
 
 HELP_MESSAGE = "`/target` - toggle current **voice** channel as TTS output"
 
 
 class TargetCog(Cog):
-    def __init__(self, target_channel_data=TargetChannelData) -> None:
-        self._target_channel_data = target_channel_data
+    def __init__(self, target_channel: TargetChannel) -> None:
+        self._target_channel = target_channel
 
     @slash_command()
     async def target(self, interaction: CommandInteraction) -> None:
@@ -23,9 +23,9 @@ class TargetCog(Cog):
         channel = interaction.channel
         if channel.type != ChannelType.voice:
             await interaction.send("Use only in voice channels!", ephemeral=True)
-        elif self._target_channel_data.get_channel_id() == channel.id:
-            await self._target_channel_data.unset_channel_id()
+        elif self._target_channel.get_channel_id() == channel.id:
+            await self._target_channel.disconnect()
             await interaction.send("Current channel unset as target")
         else:
-            await self._target_channel_data.set_channel_id(channel.id)
+            await self._target_channel.connect(channel.id)
             await interaction.send("Current channel set as target")

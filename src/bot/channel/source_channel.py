@@ -1,7 +1,7 @@
 from bot.persistency import load_source_channels, save_source_channels
 
 
-class SourceChannelData:
+class SourceChannel:
     def __init__(self) -> None:
         self._source_channel_ids = load_source_channels()
 
