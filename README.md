@@ -1,6 +1,9 @@
 # Discord TTS bot
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Black](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/black.yml/badge.svg)](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/black.yml)
+[![Flake8](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/flake8.yml/badge.svg)](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/flake8.yml)
+[![CodeQL](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/codeql-analysis.yml)
 
 A simple bot allowing reading out messages in a Discord voice channel.
 Built using [`disnake`](https://docs.disnake.dev/en/stable/) and [`gTTS`](https://gtts.readthedocs.io/en/latest/).
