@@ -8,8 +8,8 @@ from disnake import Client, Intents
 from disnake.ext.commands import InteractionBot
 from dotenv import load_dotenv
 
-from bot.channel.source_channel import SourceChannel
-from bot.channel.target_channel import TargetChannel
+from bot.channel.sources import SourceChannels
+from bot.channel.target import TargetChannel
 from bot.command.help import HelpCog
 from bot.command.list import ListCog
 from bot.command.read import ReadCog
@@ -27,17 +27,17 @@ DISCORD_BOT_TOKEN = environ["DISCORD_BOT_TOKEN"]
 
 def prepare_and_run_bot() -> Client:
     bot = InteractionBot(intents=_prepare_intents())
-    source_channel = SourceChannel()
+    source_channels = SourceChannels()
     target_channel = TargetChannel(bot)
     speaker = Speaker(target_channel)
     tts_scheduler = TtsScheduler(bot.loop, speaker)
     bot.add_cog(OnApplicationCommandCog())
     bot.add_cog(OnReadyCog(target_channel))
-    bot.add_cog(OnMessageCog(bot, tts_scheduler, source_channel))
-    bot.add_cog(SourceCog(source_channel))
+    bot.add_cog(OnMessageCog(bot, tts_scheduler, source_channels))
+    bot.add_cog(SourceCog(source_channels))
     bot.add_cog(TargetCog(target_channel))
     bot.add_cog(ReadCog(tts_scheduler, target_channel))
-    bot.add_cog(ListCog(bot, source_channel, target_channel))
+    bot.add_cog(ListCog(bot, source_channels, target_channel))
     bot.add_cog(HelpCog())
     bot.run(token=DISCORD_BOT_TOKEN)
 

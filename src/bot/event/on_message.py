@@ -7,7 +7,7 @@ from disnake import Client, Message
 from disnake.ext.commands import Cog
 from loguru import logger
 
-from bot.channel.source_channel import SourceChannel
+from bot.channel.sources import SourceChannels
 from bot.tts_scheduler import TtsScheduler
 
 
@@ -16,11 +16,11 @@ class OnMessageCog(Cog):
         self,
         bot: Client,
         tts_scheduler: TtsScheduler,
-        source_channel: SourceChannel,
+        source_channels: SourceChannels,
     ) -> None:
         self._bot = bot
         self._tts_scheduler = tts_scheduler
-        self._source_channel = source_channel
+        self._source_channels = source_channels
 
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
@@ -32,7 +32,7 @@ class OnMessageCog(Cog):
 
     def _can_read_message(self, message: Message) -> bool:
         return (
-            message.channel.id in self._source_channel.get_channel_ids()
+            message.channel.id in self._source_channels.get_channel_ids()
             and message.content
             and not message.interaction
         )

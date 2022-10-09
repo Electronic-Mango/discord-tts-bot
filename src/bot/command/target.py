@@ -7,7 +7,7 @@ from disnake import CommandInteraction
 from disnake.enums import ChannelType
 from disnake.ext.commands import Cog, slash_command
 
-from bot.channel.target_channel import TargetChannel
+from bot.channel.target import TargetChannel
 
 HELP_MESSAGE = "`/target` - toggle current **voice** channel as TTS output"
 

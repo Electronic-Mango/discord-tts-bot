@@ -6,7 +6,7 @@ from disnake import FFmpegPCMAudio, PCMVolumeTransformer
 from disnake.utils import remove_markdown
 from loguru import logger
 
-from bot.channel.target_channel import TargetChannel
+from bot.channel.target import TargetChannel
 from tts import convert_text_to_speech_file
 
 

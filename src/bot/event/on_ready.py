@@ -6,7 +6,7 @@ If target channel is loaded up, then bot will automatically connect to this chan
 from disnake.ext.commands import Cog
 from loguru import logger
 
-from bot.channel.target_channel import TargetChannel
+from bot.channel.target import TargetChannel
 
 
 class OnReadyCog(Cog):

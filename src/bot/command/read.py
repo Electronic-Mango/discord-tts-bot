@@ -9,7 +9,7 @@ Both will schedule given text for TTS.
 from disnake import CommandInteraction, Message
 from disnake.ext.commands import Cog, Param, message_command, slash_command
 
-from bot.channel.target_channel import TargetChannel
+from bot.channel.target import TargetChannel
 from bot.tts_scheduler import TtsScheduler
 
 HELP_MESSAGE = "`/read <text>` - read out given text"
