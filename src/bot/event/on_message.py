@@ -7,35 +7,20 @@ from disnake import Client, Message
 from disnake.ext.commands import Cog
 from loguru import logger
 
-from bot.persistency import load_source_channels, save_source_channels
+from bot.channel.source_data import SourceChannelData
 from bot.tts_scheduler import TtsScheduler
 
 
 class OnMessageCog(Cog):
-    def __init__(self, bot: Client, tts_scheduler: TtsScheduler) -> None:
+    def __init__(
+        self,
+        bot: Client,
+        tts_scheduler: TtsScheduler,
+        source_channel_data: SourceChannelData,
+    ) -> None:
         self._bot = bot
         self._tts_scheduler = tts_scheduler
-        self._source_channel_ids = load_source_channels()
-
-    def add_source_channel_id(self, channel_id: int) -> None:
-        """Add new source channel ID"""
-        self._source_channel_ids.add(channel_id)
-        save_source_channels(self._source_channel_ids)
-
-    def remove_source_channel_id(self, channel_id: int) -> None:
-        """Remove given source channel ID"""
-        self._source_channel_ids.remove(channel_id)
-        save_source_channels(self._source_channel_ids)
-
-    def is_source_channel_id(self, channel_id: int) -> None:
-        """Check if given channel ID is already stored"""
-        return channel_id in self._source_channel_ids
-
-    def get_source_channels(self) -> str:
-        """Return used voice channels info string"""
-        source_channels = [self._bot.get_channel(id) for id in self._source_channel_ids]
-        info = [f" - **{channel}** - {channel.guild}" for channel in source_channels]
-        return "\n".join(info)
+        self._source_channel_data = source_channel_data
 
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
@@ -47,8 +32,7 @@ class OnMessageCog(Cog):
 
     def _can_read_message(self, message: Message) -> bool:
         return (
-            self._source_channel_ids
-            and message.channel.id in self._source_channel_ids
+            message.channel.id in self._source_channel_data.get_channel_ids()
             and message.content
             and not message.interaction
         )

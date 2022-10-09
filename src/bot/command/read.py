@@ -15,6 +15,7 @@ HELP_MESSAGE = "`/read <text>` - read out given text"
 
 
 class ReadCog(Cog):
+    # TODO: Read should respond appropriately when target channel is not set
     def __init__(self, tts_scheduler: TtsScheduler) -> None:
         self._tts_scheduler = tts_scheduler
 

@@ -6,7 +6,7 @@ However, every task can access "speaker" class one at a time.
 Otherwise tasks would try to read out multiple strings at the same time.
 """
 
-from asyncio import AbstractEventLoop, Event, Lock
+from asyncio import AbstractEventLoop, Lock
 
 from loguru import logger
 
@@ -27,7 +27,5 @@ class TtsScheduler:
     async def _handle_message(self, message: str) -> None:
         async with self._lock:
             logger.info(f"Start handling message [{message}]")
-            event = Event()
-            self._speaker.speak(message, lambda _: event.set())
-            await event.wait()
+            await self._speaker.speak(message)
             logger.info("Finished handling message")
