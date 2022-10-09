@@ -8,6 +8,9 @@
 A simple bot allowing reading out messages in a Discord voice channel.
 Built using [`disnake`](https://docs.disnake.dev/en/stable/) and [`gTTS`](https://gtts.readthedocs.io/en/latest/).
 
+Set TTS language, select a voice channel as for TTS output, select however many channels to read out all messages, or use `/read` command.
+That's it!
+
 
 
 ## Table of contents
