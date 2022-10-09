@@ -9,7 +9,7 @@ from bot.bot import prepare_and_run_bot
 from log_intercept import InterceptHandler
 
 
-def main():
+def main() -> None:
     _configure_logging()
     prepare_and_run_bot()
 

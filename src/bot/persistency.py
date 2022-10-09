@@ -24,7 +24,7 @@ def load_source_channels() -> set[int]:
         return load(file)
 
 
-def save_target_channel(channel: int) -> None:
+def save_target_channel(channel: int | None) -> None:
     """Save given target channel to file"""
     with open(TARGET_CHANNEL_FILE, "wb") as file:
         return dump(channel, file)

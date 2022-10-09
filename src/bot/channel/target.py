@@ -1,6 +1,6 @@
 from asyncio import Event
 
-from disnake import AudioSource, Client, VoiceClient
+from disnake import AudioSource, Client
 
 from bot.persistency import load_target_channel, save_target_channel
 
@@ -8,7 +8,7 @@ from bot.persistency import load_target_channel, save_target_channel
 class TargetChannel:
     def __init__(self, bot: Client) -> None:
         self._bot = bot
-        self._voice_client: VoiceClient = None
+        self._voice_client = None
 
     async def load_stored_channel(self) -> None:
         """Connect to channel based on stored channel ID"""

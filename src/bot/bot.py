@@ -4,7 +4,7 @@ Module creating the bot, adding all required Cogs.
 
 from os import environ
 
-from disnake import Client, Intents
+from disnake import Intents
 from disnake.ext.commands import InteractionBot
 from dotenv import load_dotenv
 
@@ -25,7 +25,7 @@ load_dotenv()
 DISCORD_BOT_TOKEN = environ["DISCORD_BOT_TOKEN"]
 
 
-def prepare_and_run_bot() -> Client:
+def prepare_and_run_bot() -> None:
     bot = InteractionBot(intents=_prepare_intents())
     source_channels = SourceChannels()
     target_channel = TargetChannel(bot)
