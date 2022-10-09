@@ -36,7 +36,7 @@ def prepare_and_run_bot() -> Client:
     bot.add_cog(OnMessageCog(bot, tts_scheduler, source_channel))
     bot.add_cog(SourceCog(source_channel))
     bot.add_cog(TargetCog(target_channel))
-    bot.add_cog(ReadCog(tts_scheduler))
+    bot.add_cog(ReadCog(tts_scheduler, target_channel))
     bot.add_cog(ListCog(bot, source_channel, target_channel))
     bot.add_cog(HelpCog())
     bot.run(token=DISCORD_BOT_TOKEN)
