@@ -10,6 +10,20 @@ Built using [`disnake`](https://docs.disnake.dev/en/stable/) and [`gTTS`](https:
 
 
 
+## Table of contents
+
+- [Table of Contents](#table-of-contents)
+- [Requirements](#requirements)
+- [Configuration](#configuration)
+- [Deployment](#deployment)
+- [Commands](#commands)
+  - [Slash commands](#slash-commands)
+  - [Message context command](#message-context-command)
+  - [Source channels](#source-channels)
+  - [Target channel](#target-channel)
+
+
+
 ## Requirements
 
 Bot was built using `Python 3.10`. Full list of requirements is in `requirements.txt` file.
