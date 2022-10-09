@@ -15,7 +15,6 @@ That's it!
 
 ## Table of contents
 
-- [Table of Contents](#table-of-contents)
 - [Requirements](#requirements)
 - [Configuration](#configuration)
 - [Deployment](#deployment)
