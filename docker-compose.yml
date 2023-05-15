@@ -9,6 +9,10 @@ services:
     restart: unless-stopped
     volumes:
       - ./persistency:/app/persistency
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
     environment:
       # Mandatory Discord bot token.
       - DISCORD_BOT_TOKEN=
@@ -20,7 +24,7 @@ services:
       - TARGET_CHANNEL_FILE=./persistency/target
       # Optional voice file path.
       # Here gTTS will store converted audio files, which will be later read out.
-      # Doesn't matted much when it comes to Docker container.
+      # Doesn't matter much when it comes to Docker container.
       # - VOICE_FILE_PATH=voice_file.mp3
 networks:
   default:
