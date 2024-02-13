@@ -39,7 +39,10 @@ class ReadCog(Cog):
         await self._read(interaction, message.content)
 
     async def _read(self, interaction: CommandInteraction, text: str) -> None:
-        if not self._target_channel.is_connected() and not self._target_channel.can_reconnect():
+        if (
+            not self._target_channel.is_connected()
+            and not self._target_channel.can_reconnect()
+        ):
             await interaction.send("Target channel is not set!", ephemeral=True)
         elif stripped_text := text.strip():
             await interaction.send("Reading...", ephemeral=True)
