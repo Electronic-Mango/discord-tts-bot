@@ -27,12 +27,17 @@ class TargetChannel:
         """Disconnect from current voice channel"""
         await self._close_voice_client()
         self._voice_client = None
+        self._channel_id = None
         save_target_channel(None)
 
     async def reconnect(self) -> None:
         """Reconnects to previously connected channel, if possible"""
         if not self.is_connected() and self._channel_id:
             await self.connect(self._channel_id)
+
+    def can_reconnect(self) -> bool:
+        """Returns information whether reconnection to target channel is possible"""
+        return self._channel_id is not None
 
     async def _close_voice_client(self) -> None:
         if self._voice_client:
