@@ -9,6 +9,7 @@ class TargetChannel:
     def __init__(self, bot: Client) -> None:
         self._bot = bot
         self._voice_client = None
+        self._channel_id = None
 
     async def load_stored_channel(self) -> None:
         """Connect to channel based on stored channel ID"""
@@ -20,12 +21,18 @@ class TargetChannel:
         await self._close_voice_client()
         await self._open_voice_client(channel_id)
         save_target_channel(channel_id)
+        self._channel_id = channel_id
 
     async def disconnect(self) -> None:
         """Disconnect from current voice channel"""
         await self._close_voice_client()
         self._voice_client = None
         save_target_channel(None)
+
+    async def reconnect(self) -> None:
+        """Reconnects to previously connected channel, if possible"""
+        if not self.is_connected() and self._channel_id:
+            await self.connect(self._channel_id)
 
     async def _close_voice_client(self) -> None:
         if self._voice_client:
