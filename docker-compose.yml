@@ -1,6 +1,5 @@
 # Basic docker-compose.yml running the project as docker container.
 
-version: "3.9"
 services:
   discord-tts-bot:
     image: discord-tts-bot:latest
