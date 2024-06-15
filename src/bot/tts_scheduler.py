@@ -3,7 +3,7 @@ Class scheduling TTS tasks.
 Other modules can schedule strings to be read out simply by passing it to this class.
 New asyncio task will be created for each string.
 However, every task can access "speaker" class one at a time.
-Otherwise tasks would try to read out multiple strings at the same time.
+Otherwise, tasks would try to read out multiple strings at the same time.
 """
 
 from asyncio import AbstractEventLoop, Lock

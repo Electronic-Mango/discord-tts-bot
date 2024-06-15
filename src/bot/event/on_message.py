@@ -1,6 +1,6 @@
 """
 Event Cog handling all incoming messages.
-Messages can be send for TTS scheduling, based on configured TTS channels.
+Messages can be sent for TTS scheduling, based on configured TTS channels.
 """
 
 from disnake import Client, Message

@@ -5,7 +5,7 @@ Configures logging and starts the bot.
 
 from logging import INFO, basicConfig
 
-from bot.bot import prepare_and_run_bot
+from bot.discord_bot import prepare_and_run_bot
 from log_intercept import InterceptHandler
 
 
