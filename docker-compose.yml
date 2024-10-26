@@ -8,10 +8,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./persistency:/app/persistency
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
     environment:
       # Mandatory Discord bot token.
       - DISCORD_BOT_TOKEN=
