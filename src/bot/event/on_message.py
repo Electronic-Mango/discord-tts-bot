@@ -34,5 +34,5 @@ class OnMessageCog(Cog):
         return (
             message.channel.id in self._source_channels.get_channel_ids()
             and message.content
-            and not message.interaction
+            and not message.interaction_metadata
         )
