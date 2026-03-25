@@ -6,7 +6,8 @@
 [![CodeQL](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Electronic-Mango/discord-tts-bot/actions/workflows/codeql-analysis.yml)
 
 A simple bot allowing reading out messages in a Discord voice channel.
-Built using [`disnake`](https://docs.disnake.dev/en/stable/) and [`gTTS`](https://gtts.readthedocs.io/en/latest/).
+Built using [`disnake`](https://docs.disnake.dev/en/stable/) and [`gTTS`](https://gtts.readthedocs.io/en/latest/),
+managed by [uv](https://docs.astral.sh/uv/).
 
 Set TTS language, select a voice channel as for TTS output, select however many channels to read out all messages, or use `/read` command.
 That's it!
@@ -28,7 +29,8 @@ That's it!
 
 ## Requirements
 
-Bot was built using `Python 3.10`. Full list of requirements is in `requirements.txt` file.
+Bot was built using `Python 3.10` and is managed by [uv](https://docs.astral.sh/uv/).
+Full list of requirements is in `pyproject.toml` file.
 
 
 
@@ -58,6 +60,7 @@ This is already configured in default `docker-compose.yml`.
 ## Deployment
 
 The easiest way of deploying the bot is via Docker Compose.
+You don't need to have uv installed locally, Docker image should handle it on its own.
 There's `docker-compose.yml` file in the project.
 
 You just need to add to it value of `DISCORD_BOT_TOKEN`, configure `TEXT_LANGUAGE` if you want to use different language than english and run in project root:
@@ -69,10 +72,11 @@ docker compose up -d --build
 You can skip `--build` if you're recreating the container after just configuration changes.
 
 To run the bot manually you have to:
- 1. Install all dependencies in `requirements.txt`
+ 1. Make sure you [have uv installed](https://docs.astral.sh/uv/getting-started/installation/)
  2. Provide all required environment variables (e.g. via `.env` file)
- 3. Execute `src/main.py`
+ 3. Execute `uv run src/main.py` or `uv run --env-file .env src/main.py`
 
+Without uv you can install all dependencies from `pyproject.toml` manually and run `src/main.py`.
 
 
 ## Commands
