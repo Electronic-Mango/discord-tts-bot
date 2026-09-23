@@ -17,7 +17,7 @@ def save_source_channels(channels: set[int]) -> None:
 
 
 def load_source_channels() -> set[int]:
-    """Read all stored source channels, or return and emtpy set"""
+    """Read all stored source channels, or return and empty set"""
     if not exists(SOURCE_CHANNELS_FILE):
         return set()
     with open(SOURCE_CHANNELS_FILE, "rb") as file:
