@@ -8,10 +8,10 @@ dependencies = [
     "disnake[voice]>=2.12.1",
     "gtts>=2.5.4",
     "loguru>=0.7.3",
-    "python-dotenv>=1.2.2",
+    "python-dotenv>=1.2.4",
 ]
 
 [dependency-groups]
 dev = [
-    "ruff>=0.16.1",
+    "ruff>=0.16.10",
 ]
